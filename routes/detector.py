@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, flash,request,url_for
+from flask import Blueprint, render_template, redirect, flash,request,url_for,send_from_directory
 import urllib.request
 from werkzeug.utils import secure_filename
 import os
@@ -45,3 +45,7 @@ def upload_image():
 def display_image(filename):
 	#print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+
+@detector.route('/uploads/<filename>')
+def upload(filename):
+    return send_from_directory('uploads/', filename)

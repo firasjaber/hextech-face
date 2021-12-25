@@ -14,7 +14,7 @@
 </p>
 {% if filename %}
 	<div>
-		<img src="{{ url_for('static', filename='server.png') }}">
+		<img src="{{ url_for('detector.upload', filename=filename) }}">
 	</div>
 {% endif %}
 <form method="post" action="/detector" enctype="multipart/form-data">

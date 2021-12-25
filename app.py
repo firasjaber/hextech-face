@@ -3,6 +3,8 @@ from routes.detector import detector
 from routes.faces import faces
 app = Flask(__name__)
 
+app.secret_key = "secret key"
+
 app.register_blueprint(detector)
 app.register_blueprint(faces)
 

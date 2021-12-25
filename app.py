@@ -1,9 +1,14 @@
 from flask import Flask
+from routes.detector import detector
+from routes.faces import faces
 app = Flask(__name__)
+
+app.register_blueprint(detector)
+app.register_blueprint(faces)
 
 @app.route("/")
 def hello():
-  return "Hello World!"
+  return "index route"
 
 if __name__ == "__main__":
   app.run()

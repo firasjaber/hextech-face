@@ -67,6 +67,14 @@ def query_all_faces():
 
 	return persons	
 
+def insert_face(name,filename):
+	cur.execute('INSERT INTO PERSON(Name) VALUES (?)',(name,))
+	conn.commit()
+	cur.execute("SELECT * FROM PERSON WHERE Name = ?",(name,))
+	person = cur.fetchall()[0]
+	cur.execute('INSERT INTO FACE(PersonID,filename) VALUES(?,?)',(person[0],filename,))
+	conn.commit()
+
 def drop_tables():
 	print("dropping databases")
 	cur.execute("DROP TABLE IF EXISTS PERSON")

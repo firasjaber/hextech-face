@@ -1,0 +1,14 @@
+<h1>All faces</h1>
+<a href="/faces/add">Add face</a>
+<table border="1">
+  <tr>
+    <td>Person name</td>
+    <td>Face file name</td>
+  </tr>
+  {% for face in faces %}
+  <tr>
+    <td>{{ face["name"] }}</td>
+    <td>{{ face["face"] }}</td>
+  </tr>
+  {% endfor %}
+</table>

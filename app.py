@@ -1,6 +1,8 @@
 from flask import Flask
 from routes.detector import detector
 from routes.faces import faces
+from database.db import init,close
+
 app = Flask(__name__)
 
 app.secret_key = "secret key"
@@ -13,4 +15,9 @@ def hello():
   return "index route"
 
 if __name__ == "__main__":
-  app.run()
+  init()
+  app.run(debug= True)
+
+@app.teardown_appcontext
+def close_connection(exception):
+    close()

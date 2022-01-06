@@ -1,6 +1,6 @@
 <!doctype html>
-<title>Python Flask File Upload Example</title>
-<h2>Select a file to upload</h2>
+<title>Face Detector</title>
+<h2>Select your face to upload</h2>
 <p>
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
@@ -16,14 +16,15 @@
 	<div>
 		<img src="{{ url_for('detector.upload', filename=filename) }}">
 	</div>
-{% endif %}
+{% else %}
 <form method="post" action="/detector" enctype="multipart/form-data">
     <dl>
 		<p>
-			<input type="file" name="file" autocomplete="off" required>
+			<input type="file" accept="image/*" capture name="file" required>
 		</p>
     </dl>
     <p>
 		<input type="submit" value="Submit">
 	</p>
 </form>
+{% endif %}

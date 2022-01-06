@@ -2,6 +2,9 @@ from flask import Blueprint, render_template, redirect, flash,request,url_for,se
 import urllib.request
 from werkzeug.utils import secure_filename
 import os
+from helpers.email import sendEmail
+
+from helpers.recognition import match_face
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -29,12 +32,15 @@ def upload_image():
 		return redirect(request.url)
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
-		print("here..")
 		print(os.path.isdir("uploads"))
 		file.save(os.path.join('uploads', filename))
-		print("....")
-		print('upload_image filename: ' + filename)
-		flash('Image successfully uploaded and displayed below')
+		face_detected = match_face(filename)
+		if face_detected["detected"]:
+			flash("Face detected !, you are "+face_detected["person"])
+		else:
+			flash("Face not found !")
+			sendEmail()
+		print(face_detected)
 		return render_template('upload.html', filename=filename)
 	else:
 		flash('Allowed image types are -> png, jpg, jpeg, gif')

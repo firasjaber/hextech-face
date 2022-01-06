@@ -18,7 +18,7 @@ detector = Blueprint('detector', __name__,
 # face upload form
 @detector.route('/detector')
 def upload_form():
-	return render_template('upload.html')
+	return render_template('detector.html')
 
 # file upload route
 @detector.route('/detector', methods=['POST'])
@@ -41,7 +41,7 @@ def upload_image():
 			flash("Face not found !")
 			sendEmail()
 		print(face_detected)
-		return render_template('upload.html', filename=filename)
+		return render_template('detector.html', filename=filename)
 	else:
 		flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)
@@ -49,7 +49,6 @@ def upload_image():
 # result
 @detector.route('/detector/<filename>')
 def display_image(filename):
-	#print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 @detector.route('/uploads/<filename>')

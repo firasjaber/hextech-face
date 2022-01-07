@@ -1,12 +1,13 @@
-<!doctype html>
-<title>Add face to database</title>
-<h2>Select a face image to upload</h2>
+{% extends "layout.html" %}
+{% block title %}Add Face{% endblock %}
+{% block content %}
+<h2 class="text-lg font-semibold my-2 mb-4">Select a face image to upload</h2>
 <p>
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
 		<ul>
 		{% for message in messages %}
-		  <li>{{ message }}</li>
+		  <li class="font-semibold my-2">{{ message }}</li>
 		{% endfor %}
 		</ul>
 	  {% endif %}
@@ -16,15 +17,18 @@
 	<div>
 		<img src="{{ url_for('faces.upload', filename=filename) }}">
 	</div>
-{% endif %}
+{% else %}
 <form method="post" action="/faces" enctype="multipart/form-data">
     <dl>
-		<p>
+		<p class="mb-4">
 			<input type="file" name="file" autocomplete="off" required>
 		</p>
     </dl>
-		<input type="text" name="name" required/>
+		<label for="name" class="">Person Name</label><br>
+		<input type="text" placeholder="Firas Chafroud" class="input input-bordered p-2 border-2 border-gray-600 rounded-md mt-2" name="name" required/>
     <p>
-		<input type="submit" value="Submit">
+		<input class="h-10 px-5 mt-4 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"type="submit" value="Submit">
 	</p>
 </form>
+{% endif %}
+{% endblock %}

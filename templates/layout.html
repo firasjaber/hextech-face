@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block head %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <title>{% block title %}{% endblock %} - HextechFace</title>
+    {% endblock %}
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <div id="content" class="flex flex-col mt-20 items-center justify-center">
+      <div class="bg-gray-50 p-4 pb-10 rounded-md shadow min-w-fit">
+        {% block content %}{% endblock %}
+      </div>
+      <div id="footer" class="mt-4 text-center">
+        {% block footer %} Hextech Face by Firas Jaber & Tarek Chafroud. {%
+        endblock %}
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,14 +1,39 @@
-<h1>All faces</h1>
-<a href="/faces/add">Add face</a>
-<table border="1">
-  <tr>
-    <td>Person name</td>
-    <td>Face file name</td>
-  </tr>
-  {% for face in faces %}
-  <tr>
-    <td>{{ face["name"] }}</td>
-    <td>{{ face["face"] }}</td>
-  </tr>
-  {% endfor %}
+{% extends "layout.html" %} {% block title %}All Faces{% endblock %} {% block
+content %}
+<div class="py-6 flex items-center justify-between">
+  <h1 class="text-2xl font-bold">All faces</h1>
+  <div class="space-x-2">
+    <a href="/faces/add" class="underline">Add face</a>
+    <a href="/detector" class="underline">Detect face</a>
+  </div>
+</div>
+<table class="min-w-full w-[400px] divide-y divide-gray-300">
+  <thead class="bg-gray-100">
+    <tr>
+      <th
+        scope="col"
+        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+      >
+        <div class="p-2">Person name</div>
+      </th>
+      <th
+        scope="col"
+        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+      >
+        Face file
+      </th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200">
+    {% for face in faces %}
+    <tr>
+      <td><div class="p-2">{{ face["name"] }}</div></td>
+      <td>
+        <a class="underline" href={{"/faces/" + face["face"] }}
+        target="_blank">{{ face["face"] }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
+{% endblock %}

@@ -44,7 +44,7 @@ def upload_image():
         print('upload_image filename: ' + filename)
         insert_face(name, filename)
         flash('Face image uploaded successfully')
-        return render_template('upload.html', filename=filename)
+        return render_template('add_face.html', filename=filename)
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)

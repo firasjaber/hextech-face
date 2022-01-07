@@ -1,20 +1,29 @@
-<!doctype html>
-<title>Face Detector</title>
-<h2>Select your face to upload</h2>
+{% extends "layout.html" %}
+{% block title %}Detector{% endblock %}
+{% block content %}
+<h2 class="text-lg font-semibold my-2 mb-4">Select a face to detect</h2>
 <p>
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
 		<ul>
 		{% for message in messages %}
-		  <li>{{ message }}</li>
+		  <li class="text-md mb-2">{{ message }}</li>
 		{% endfor %}
 		</ul>
 	  {% endif %}
 	{% endwith %}
 </p>
 {% if filename %}
-	<div>
-		<img src="{{ url_for('detector.upload', filename=filename) }}">
+	<div class="space-y-4">
+		{% if face_detected['detected'] == True %}
+		<div>Detected person name : <span class="font-bold">{{ face_detected['person'] }}</span></div>
+		{% endif %}
+		<div>Provided picture : </div>
+		<img class="max-w-lg shadow rounded-md"src="{{ url_for('detector.upload', filename=filename) }}">
+		{% if face_detected['detected'] == True %}
+		<div>Original face : </div>
+		<img class="max-w-lg shadow rounded-md"src="{{ url_for('detector.upload', filename=face_detected['original_img']) }}">
+		{% endif %}
 	</div>
 {% else %}
 <form method="post" action="/detector" enctype="multipart/form-data">
@@ -24,7 +33,8 @@
 		</p>
     </dl>
     <p>
-		<input type="submit" value="Submit">
+		<input class="h-10 px-5 mt-4 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"type="submit" value="Submit">
 	</p>
 </form>
 {% endif %}
+{% endblock %}

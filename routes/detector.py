@@ -36,20 +36,16 @@ def upload_image():
 		file.save(os.path.join('uploads', filename))
 		face_detected = match_face(filename)
 		if face_detected["detected"]:
-			flash("Face detected !, you are "+face_detected["person"])
+			flash("Face detected !")
 		else:
 			flash("Face not found !")
 			sendEmail()
 		print(face_detected)
-		return render_template('detector.html', filename=filename)
+		return render_template('detector.html', filename=filename, face_detected=face_detected)
 	else:
 		flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)
 
-# result
-@detector.route('/detector/<filename>')
-def display_image(filename):
-	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 @detector.route('/uploads/<filename>')
 def upload(filename):

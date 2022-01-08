@@ -39,7 +39,7 @@ def upload_image():
 			flash("Face detected !")
 		else:
 			flash("Face not found !")
-			sendEmail()
+			sendEmail("http://localhost:5000/uploads/"+filename)
 		print(face_detected)
 		return render_template('detector.html', filename=filename, face_detected=face_detected)
 	else:

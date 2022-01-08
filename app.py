@@ -16,7 +16,7 @@ def hello():
 
 if __name__ == "__main__":
   init()
-  app.run(debug= True)
+  app.run(host="0.0.0.0",debug= True)
 
 @app.teardown_appcontext
 def close_connection(exception):
